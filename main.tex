@@ -1,0 +1,144 @@
+\documentclass[12pt, oneside, openany]{scrreprt}
+\usepackage[a4paper, margin=3cm]{geometry}
+
+% Citation style is specified in "jurzitat.csl" file. To make this work you need to compile this file using the following recipe
+% 1. Compiling with latex/pdflatex/xelatex, 2. run the citeproc-lua on this file, 3. follow up one or two more runs of latex/pdflatex/xelatex compilation.
+\usepackage{citation-style-language}
+\cslsetup{style = jurzitat}
+\addbibresource{literatur.bib} % Your .bib file
+
+\usepackage{csquotes} 
+\usepackage{hyperref} 
+\usepackage{microtype} 
+\usepackage[ngerman]{babel}
+\setlength{\parindent}{0pt}
+\usepackage{parskip}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{5} % Gliederungsebenen
+
+% **Kapitel = Kapitel 1, Kapitel 2, ...**
+\renewcommand{\thechapter}{Kapitel \arabic{chapter}}
+
+% **Abschnitte = A, B, C...**
+\renewcommand{\thesection}{\Alph{section}.}
+
+% **Unterabschnitte = I, II, III...**
+\renewcommand{\thesubsection}{\Roman{subsection}.}
+
+% **Subsubsections = 1, 2, 3...**
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}.}
+
+% **Paragraphen = a, b, c...**
+\renewcommand{\theparagraph}{\alph{paragraph}.}
+
+% **Subparagraphen = (1), (2), (3)...**
+\renewcommand{\thesubparagraph}{(\arabic{subparagraph})}
+
+% Titelstile definieren
+\titleformat{\chapter}[display]
+  {\bfseries\LARGE} % Kapitel fett & groß
+  {\thechapter}{1ex}{\titlerule\vspace{1ex}\Huge}
+
+\titleformat{\section}
+  {\large\bfseries} % Fett & groß
+  {\thesection}{1ex}{}
+
+\titleformat{\subsection}
+  {\large\bfseries} % Mittelgroß
+  {\thesubsection}{1ex}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries} % Klein
+  {\thesubsubsection}{1ex}{}
+
+\titleformat{\paragraph}
+  {\normalsize\itshape} % Kursiv
+  {\theparagraph}{1ex}{}
+
+\titleformat{\subparagraph}
+  {\normalsize\itshape} % Noch kleiner & kursiv
+  {\thesubparagraph}{1ex}{}
+
+
+
+\usepackage{tocloft}
+\setlength{\cftchapnumwidth}{6em}
+%\setlength{\cftsecindent}{0pt}
+\setlength{\cftsecnumwidth}{3em}
+%\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsecnumwidth}{3em}
+%\setlength{\cftsubsubsecindent}{0pt}
+\setlength{\cftsubsubsecnumwidth}{3em}
+%\setlength{\cftparaindent}{0pt}
+\setlength{\cftparanumwidth}{3em}
+%\setlength{\cftsubparaindent}{0pt}
+\setlength{\cftsubparanumwidth}{3em}
+
+
+
+\begin{document}
+
+\title{Titel der Arbeit}
+\subtitle{Untertitel der Arbeit}
+\author{Vorname Nachname}
+\date{Datum der Abgabe}
+
+\maketitle
+
+\setcounter{tocdepth}{6}
+\tableofcontents
+
+\chapter{Einleitung}
+
+\section{Einführung}
+Hello, world!
+
+\section{Nächster Abschnitt}
+
+So kannst du bequem zitieren: \enquote{Pacta \enquote{sunt} servanda.}
+
+Jetzt folgt --- ein --- Gedankenstrich.
+
+Jetzt kommt ein \emph{kursiv} geschriebenes Wort.
+
+Mit dem nächsten Satz beginnt eine neue Seite \newpage
+
+\include{content/extern}
+
+\chapter{Das zweite Kapitel}
+
+Jetzt testen wir Fußnoten für jeden Beitragstyp.
+
+Urteil.\cite[prefix = {}, suffix = {.}]{UrteilVom160520132013}
+
+Buch/Monographie.\cite[prefix = {}, suffix = {.}, page = 23]{buscheVerwaltungsautomation20Automatisiert2023}
+
+Beitrag in Zeitschrift.\cite[prefix = {}, suffix = {.}, page = 750]{martiniOnceOnlyOnly2017}
+
+Beitrag in Sammelband.\cite[prefix = {}, suffix = {.}, page = 199]{druenAmtsermittlungsgrundsatzUndRisikomanagement2019a}
+
+Beitrag in Kommentar.\cite[prefix = {}, suffix = { Rn. 88.}]{klein882024} \cite[prefix = {}, suffix = {Rn. 102.}]{difabioArt22025}
+
+Webseite.\cite[prefix = {}, suffix = {.}]{kochMerzWerDaten2025}
+
+Drucksache.\cite[prefix = {}, suffix = {.}]{StellungnahmeEntwurfGesetzes}
+
+Scheint zu funktionieren. Jetzt kommen die übrigen Gliederungsebenen.
+
+\section{Das ist eine Sektion(Ebene 2) }
+
+\subsection{Das ist eine Subsektion (Ebene 3)}
+
+\subsubsection{Jetzt eine Subsubsektion (Ebene 4)}
+
+\paragraph{Das nennt man einen Paragraphen (Ebene 5)}
+
+\subparagraph{Folglich handelt es sich hier um einen Subparagraphen (Ebene 6)}
+
+Auf der nächsten Seite generieren wir ein Literaturverzeichnis.
+
+\printbibliography[title=Literaturverzeichnis, nottype = {legal_case}] 
+
+\end{document}

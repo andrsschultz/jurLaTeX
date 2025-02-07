@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Don't ignore .gitignore itself
+!.gitignore
+
+# Include specific files and directories
+!main.tex
+!jurzitat.csl
+!literatur.bib
+!content/**

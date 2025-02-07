@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="note" default-locale="de-DE">
+  <info>
+    <title>Juristischer Zitierstil (Deutsch)</title>
+    <title-short>JurZitat</title-short>
+    <author>
+      <name>Andreas Schultz</name>
+    </author>
+    <category citation-format="note"/>
+    <category field="law"/>
+    <summary>TBD</summary>
+    <updated>2025-02-07T02:42:26+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xmlns="http://purl.org/net/xbiblio/csl" xml:lang="de-DE">
+    <date form="numeric">
+      <date-part name="day" form="numeric" suffix="."/>
+      <date-part name="month" form="numeric" suffix="."/>
+      <date-part name="year"/>
+    </date>
+  </locale>
+  <macro name="author">
+    <names variable="author" font-style="italic">
+      <name delimiter=" / " name-as-sort-order="all" sort-separator=", " form="long"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names variable="editor" font-style="italic">
+      <name delimiter=" / " name-as-sort-order="all" sort-separator=", " form="long"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-note">
+    <names variable="author" font-style="italic">
+      <name form="short" delimiter="/" name-as-sort-order="all"/>
+    </names>
+  </macro>
+  <macro name="author-commentary">
+    <choose>
+      <if variable="collection-editor">
+        <names variable="collection-editor">
+          <name form="short" delimiter="/" name-as-sort-order="all"/>
+        </names>
+      </if>
+      <else>
+        <names variable="author editor">
+          <name form="short" delimiter="/" name-as-sort-order="all"/>
+        </names>
+      </else>
+    </choose>
+  </macro>
+  <macro name="locator-with-label">
+    <group delimiter=" ">
+      <label variable="locator" form="symbol"/>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <macro name="autor-editor-note">
+    <names variable="author">
+      <name form="short" delimiter="/" sort-separator="" font-style="italic"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-chapter">
+    <names variable="container-author">
+      <name delimiter="/ " name-as-sort-order="all" sort-separator=", " form="short"/>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+  <macro name="journalname-year">
+    <group delimiter=" ">
+      <text variable="container-title"/>
+      <date date-parts="year" form="text" variable="issued"/>
+    </group>
+  </macro>
+  <macro name="firstpage-locator">
+    <text variable="page-first"/>
+    <text variable="locator" prefix=" (" suffix=")"/>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if match="any" is-numeric="edition">
+        <group delimiter=" ">
+          <number vertical-align="baseline" suffix=" " variable="edition" form="ordinal"/>
+          <text term="edition" form="short" suffix="."/>
+        </group>
+      </if>
+      <else-if variable="edition">
+        <text variable="edition" form="short"/>
+      </else-if>
+      <else>
+        <date date-parts="year" form="text" variable="issued" prefix=" "/>
+      </else>
+    </choose>
+  </macro>
+  <citation et-al-min="5" et-al-use-first="1">
+    <layout delimiter="; ">
+      <choose>
+        <!-- Beitrag in Zeitschrift
+             Style: Kirchhof, StuW 1993, 371    
+        -->
+        <if type="article-journal">
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <text macro="journalname-year"/>
+            <text macro="firstpage-locator"/>
+          </group>
+        </if>
+        <!-- Buch/Monographie
+            Style: Nink, Justiz und Algorithmen, 2021   
+        -->
+        <else-if type="book">
+          <group delimiter=", ">
+            <text macro="autor-editor-note"/>
+            <text variable="title" form="short"/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+            <group>
+              <text value="S. "/>
+              <text variable="locator"/>
+            </group>
+          </group>
+        </else-if>
+        <!-- Beitrag in Kommentar
+          Style: Kirchhoff, in: Tipke/Kruse, AO, § 88
+        -->
+        <else-if type="entry-encyclopedia">
+          <names variable="author" font-style="italic" suffix=", in: ">
+            <name form="short" delimiter="/"/> <!-- Display editor names in short form -->
+          </names>
+          <names variable="editor" suffix=", ">
+            <name form="short" delimiter="/"/> 
+          </names>
+          <text variable="title" form="short" prefix=", ", suffix=", "/>
+          <text variable="title"/>
+        </else-if>
+        <!-- Beitrag in Sammelband
+          Style: Seer, in: Digitalisierung im Steuerrecht, 2019, S. 247 
+        -->
+        <else-if type="chapter">
+          <names variable="author" font-style="italic" suffix=", in: ">
+            <name form="short" delimiter=", "/>
+          </names>
+          <!-- <text macro="autor-editor-note" suffix=": "/> -->
+          <text variable="container-title" suffix=", "/>
+          <text macro="edition"/>
+          <text macro="firstpage-locator" prefix=", S. "/>
+        </else-if>
+        <!-- Urteil / Beschlusssache / Drucksache / Sonstiges
+        Style: BFH, Urt. v. 21.11.2024 - VI R 9/22, DStR 2025, 93 
+        Style: BT-Drucks. 14/6049
+        -->
+        <else-if type="legal_case" match="any">
+          <text variable="note"/>
+        </else-if>
+        <!-- Webseite
+        Style: Smith, Backlash Against Using Data to Foretell Defendants’ Futures, The New York Times, 2016, https://www.nytimes.com/2016/06/23/us/backlash-in-wisconsin-against-using-data-to-foretell-defendants-futures.html (letzter Abruf: 11.11.2021)
+        -->
+        <else-if type="webpage">
+          <group>
+            <text macro="author-note" suffix=", "/> 
+            <text variable="title" suffix=", "/>
+            <date variable="issued suffix=", "">
+              <date-part name="year" suffix=", "/>
+            </date>
+            <text variable="URL" prefix="abrufbar unter: "/>
+            <group prefix=" (letzter Abruf: " suffix=")">
+              <date variable="accessed">
+                <date-part name="day" form="numeric" suffix="."/>
+                <date-part name="month" form="numeric" prefix="" suffix="."/>
+                <date-part name="year"/>
+              </date>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <text variable="title"/>
+            <text macro="locator-with-label"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+  <bibliography>
+    <sort>
+      <key macro="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout>
+      <choose>
+        <!-- Beitrag in Zeitschrift
+             Style: Kirchhof, Gregor: Der Rechtsschutz in Steuersachen, StuW 1993, S. 371 - 390     
+        -->
+        <if type="article-journal">
+          <group delimiter=": ">
+            <text macro="author"/>
+            <group delimiter=", ">
+              <text variable="title"/>
+              <text macro="journalname-year"/>
+              <text variable="page" prefix="S. "/>
+            </group>
+          </group>
+        </if>
+        <!-- Buch / Monographie
+             Style: Nink, David: Justiz und Algorithmen: über die Schwächen menschlicher Entscheidungsfindung und die Möglichkeiten neuer Technologien in der Rechtsprechung, 2. Auflage, Berlin, 2021      
+        -->
+        <else-if type="book">
+          <group delimiter=": ">
+            <text macro="author"/>
+            <group delimiter=", ">
+              <text variable="title"/>
+              <text variable="edition"/>
+              <text variable="publisher-place"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </group>
+        </else-if>
+        <!-- Beitrag in Kommentar
+             Style: Tipke, Klaus / Kruse, Heinrich Wilhelm (Begr.), Abgabenordnung - Finanzgerichtsordnung, 6. Auflage, Köln, 2022       
+        -->
+        <else-if type="entry-encyclopedia">
+          <text macro="editor"/>
+          <text variable="note" prefix = " (" suffix = "): "/>
+          <text variable="container-title" suffix = ", "/>
+          <text macro="edition" suffix = ", "/>
+          <text variable="publisher-place" suffix = ", "//>
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+        </else-if>
+        <!-- Beitrag in Sammelband
+             Style: Seer, Roman: Datenschutz und Datenaustausch, in: Hey, Johanna (Hrsg.): Digitalisierung im Steuerrecht, Köln, 2019, S. 247 - 289        
+        -->
+        <else-if type="chapter">
+          <text macro="author" suffix=": "/>
+          <text variable="title" suffix=", in: "/>
+          <names variable="editor" font-style="italic">
+            <name delimiter="/ " name-as-sort-order="all" sort-separator=", " form="long"/>
+            <substitute>
+            <names variable="editor"/>
+            </substitute>
+          </names>
+          <text variable="note" prefix = " (" suffix = "): "/>
+          <text variable="container-title" suffix=", "/>
+          <text variable="publisher-place" suffix=", "/>
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+          <text variable="page" prefix=", S. "/>
+        </else-if>
+        <!-- Webseite 
+             Style: Smith, Mitch: Backlash Against Using Data to Foretell Defendants’ Futures, The New York Times, 12.01.2016, https://www.nytimes.com/2016/06/23/ us/backlash-in-wisconsin-against-using-data-to-foretell-defendants-futures.html (letzter Abruf: 11.11.2021)      
+        -->
+        <else-if type="webpage">
+          <group>
+            <text macro="author" suffix=", "/> 
+            <text variable="title" suffix=", "/> 
+             <text variable="titleaddon" suffix=", "/>
+            <date variable="issued suffix=", "">
+              <date-part name="year" suffix=", "/>
+            </date>
+            <text variable="URL" prefix="abrufbar unter: "/>
+            <group prefix=" (letzter Abruf: " suffix=")">
+              <date variable="accessed">
+                <date-part name="day" form="numeric" suffix="."/>
+                <date-part name="month" form="numeric" prefix="" suffix="."/>
+                <date-part name="year"/>
+              </date>
+            </group>
+          </group>
+        </else-if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
