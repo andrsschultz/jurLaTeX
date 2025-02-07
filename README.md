@@ -1,4 +1,4 @@
-# jurLaTeX - Template for Legal Academic Writing
+# jurLaTeX - Template for German Legal Academic Writing
 
 A LaTeX template specifically designed for legal academic writing in German, featuring proper legal citation styles and document structuring.
 
