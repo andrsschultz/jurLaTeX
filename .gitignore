@@ -5,6 +5,7 @@
 !.gitignore
 
 # Include specific files and directories
+!README.md
 !main.tex
 !jurzitat.csl
 !literatur.bib
