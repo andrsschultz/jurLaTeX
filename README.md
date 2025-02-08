@@ -32,3 +32,5 @@ To properly compile your document with citations:
 1. Compile with LaTeX/pdfLaTeX/XeLaTeX
 2. Run citeproc-lua on the file
 3. Compile again with LaTeX/pdfLaTeX/XeLaTeX (1-2 times)
+
+Note: In case your document does not include citations (yet), skip step 2
